@@ -1,0 +1,7 @@
+baseURL = 'https://ripping-at-the-siem.github.io'
+locale = 'en-us'
+title = 'Ripping At The SIEM'
+theme = 'ananke'
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
