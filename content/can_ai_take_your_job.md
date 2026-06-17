@@ -28,7 +28,7 @@ When I was working at AspenTech (aquired by Emerson) they were preparing their c
 
 In 2020 Microsoft posted this article [Microsoft will be carbon negative by 2030](https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/)
 
-![Chart showing current 2020 emissions with drop to 0 by 2030](/attachments/microsoft-will-be-carbon-negative-in-2030.jpg)
+![Chart showing current 2020 emissions with drop to 0 by 2030](images/microsoft-will-be-carbon-negative-in-2030.jpg)
 [Source: Microsoft Blog](https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/)
 
 Where did that focus go? My understanding of the world and climate impacts of human activity stem from the biblical biblical view point in [Genesis 1:28](https://www.bible.com/bible/59/GEN.1.28.ESV) to "...fill the earth and subdue it...". We should be using the resources we are given wisely to create and to better ourselves and not excessivly. In all things balance.
