@@ -2,6 +2,9 @@ baseURL = 'https://ripping-at-the-siem.github.io'
 locale = 'en-us'
 title = 'Ripping At The SIEM'
 theme = 'ananke'
+sectionPagesMenu = 'main'
+[params]
+  subtitle = 'A Blog by Joshua Wyss'
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
