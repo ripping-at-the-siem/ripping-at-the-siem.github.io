@@ -9,7 +9,7 @@ keywords: thoughts
 summary: If I could get the right query and the right automation in place, I could stop the problem before it started. Instead, both cases expose the same annoying truth, sometimes the data is the real blocker. Can I really blame the vendor though?
 description: I’ve spent enough time writing detections to know that the hard part is rarely the query. In these two cases, I thought I had the right approach, but the missing data and delayed telemetry made the whole plan fall apart. It’s a reminder that sometimes the biggest limitation isn’t the tool, it’s the signal. Am I just Icarus trying to build something that isn't possible?
 ---
-![[images/where_kql_failed_me.png]]
+![header image](images/where_kql_failed_me.png)
 
 # Where KQL Failed me
 
