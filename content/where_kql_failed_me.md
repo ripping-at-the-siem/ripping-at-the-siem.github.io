@@ -1,5 +1,5 @@
 ---
-publishDate: 2025-06-17
+publishDate: 2026-06-17
 draft: false
 params:
   author: Joshua Wyss
