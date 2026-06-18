@@ -10,6 +10,22 @@
 		
 		
 		
+			<lastBuildDate>Wed, 17 Jun 2026 00:00:00 +0000</lastBuildDate>
+		
 			<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Where KQL Failed me</title>
+				<link>http://localhost:1313/blog/where_kql_failed_me/</link>
+				<pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/blog/where_kql_failed_me/</guid>
+				<description>If I could get the right query and the right automation in place, I could stop the problem before it started. Instead, both cases expose the same annoying truth, sometimes the data is the real blocker. Can I really blame the vendor though?</description>
+			</item>
+			<item>
+				<title>From Net-Zero to &#34;Use more tokens!&#34;</title>
+				<link>http://localhost:1313/blog/can_ai_take_your_job/</link>
+				<pubDate>Thu, 28 May 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/blog/can_ai_take_your_job/</guid>
+				<description>AI may not take your job, but it is already changing who gets hired, what gets measured, and whether businesses still care about promises like net-zero carbon. To complete the irony, I talking to Gemini switching between Chinese &amp;amp; English to try and break its guardrails when I discovered that &amp;hellip;</description>
+			</item>
 	</channel>
 </rss>

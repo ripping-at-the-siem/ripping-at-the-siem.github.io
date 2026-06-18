@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Where KQL Failed me | Ripping At The SIEM</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="I’ve spent enough time writing detections to know that the hard part is rarely the query. In these two cases, I thought I had the right approach, but the missing data and delayed telemetry made the whole plan fall apart. It’s a reminder that sometimes the biggest limitation isn’t the tool, it’s the signal. Am I just Icarus trying to build something that isn&#39;t possible?">
+    <meta name="generator" content="Hugo 0.163.2">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="Joshua Wyss">
+    
+
+    <link rel="stylesheet" href="/ananke/css/main.css">
+    <script>
+  (function () {
+    "use strict";
+
+    
+    
+    function revealButtons() {
+      var buttons = document.querySelectorAll(".code-block .code-copy[hidden]");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].hidden = false;
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", revealButtons);
+    } else {
+      revealButtons();
+    }
+
+    function flash(button) {
+      var label = button.querySelector(".code-copy-label");
+      var previous = label ? label.textContent : null;
+      button.classList.add("is-copied");
+      if (label) label.textContent = "Copied";
+      window.setTimeout(function () {
+        button.classList.remove("is-copied");
+        if (label && previous !== null) label.textContent = previous;
+      }, 2000);
+    }
+
+    function legacyCopy(text) {
+      var area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "absolute";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (e) {
+        ok = false;
+      }
+      document.body.removeChild(area);
+      return ok;
+    }
+
+    function copyFrom(button) {
+      var container = button.closest(".code-block");
+      if (!container) return;
+      var pre = container.querySelector("pre");
+      if (!pre) return;
+      var source = pre.querySelector("code") || pre;
+      var text = source.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () { flash(button); },
+          function () { if (legacyCopy(text)) flash(button); }
+        );
+      } else if (legacyCopy(text)) {
+        flash(button);
+      }
+    }
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest(".code-copy");
+      if (button) copyFrom(button);
+    });
+  })();
+</script>
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/blog/where_kql_failed_me/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/blog/where_kql_failed_me/">
+	<meta property="og:site_name" content="Ripping At The SIEM">
+	<meta property="og:title" content="Where KQL Failed me">
+	<meta property="og:description" content="I’ve spent enough time writing detections to know that the hard part is rarely the query. In these two cases, I thought I had the right approach, but the missing data and delayed telemetry made the whole plan fall apart. It’s a reminder that sometimes the biggest limitation isn’t the tool, it’s the signal. Am I just Icarus trying to build something that isn&#39;t possible?">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="blog">
+		<meta property="article:published_time" content="2026-06-17T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-06-17T00:00:00+00:00">
+
+	<meta itemprop="name" content="Where KQL Failed me">
+	<meta itemprop="description" content="I’ve spent enough time writing detections to know that the hard part is rarely the query. In these two cases, I thought I had the right approach, but the missing data and delayed telemetry made the whole plan fall apart. It’s a reminder that sometimes the biggest limitation isn’t the tool, it’s the signal. Am I just Icarus trying to build something that isn&#39;t possible?">
+	<meta itemprop="datePublished" content="2026-06-17T00:00:00+00:00">
+	<meta itemprop="dateModified" content="2026-06-17T00:00:00+00:00">
+	<meta itemprop="wordCount" content="2105">
+	<meta itemprop="keywords" content="Thoughts">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Where KQL Failed me">
+	<meta name="twitter:description" content="I’ve spent enough time writing detections to know that the hard part is rarely the query. In these two cases, I thought I had the right approach, but the missing data and delayed telemetry made the whole plan fall apart. It’s a reminder that sometimes the biggest limitation isn’t the tool, it’s the signal. Am I just Icarus trying to build something that isn&#39;t possible?">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-where_kql_failed_me">
+   
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://localhost:1313/images/where_kql_failed_me.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Ripping At The SIEM
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/blog/" title="Blogs page">
+              Blogs
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/reference/" title="References page">
+              References
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+      </div>
+    </div>
+  </header>
+
+
+<main class="pb7" role="main">
+  
+
+  <article class="page-where_kql_failed_me flex-l mw7 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100"><aside class="instapaper_ignoref b helvetica tracked ttu">
+    <a class="link dim" href="http://localhost:1313/blog/">Blogs</a>
+  </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">Where KQL Failed me</h1>
+      
+      <p class="tracked"><strong>Joshua Wyss</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2026-06-17T00:00:00Z">June 17, 2026</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><h1 id="where-kql-failed-me">Where KQL Failed me</h1>
+<p>I absolutely love log hunting! When I was told &ldquo;Congratulations, in this post-merger company you are now in charge of the SIEM/SOAR work. Learn fast!&rdquo; I was like, well logs sound terribly boring, but I like the idea of looking like a <a href="https://hackertyper.net">movie computer hacker</a> staring at a wall of text. And, I loved listening to a past co-worker who enjoyed explaining his bespoke log ingestion/storage infrastructure to fresh-from-college-me. This could be fun right? (That attitude has served me well in so many mergers/acquisitions/role changes. Thanks mom &amp; dad!)</p>
+<p>Since getting started in Microsoft Sentinel there have only been 2 times that &ldquo;KQL failed me&rdquo;. I knew going into both of these scenarios would be a challenge, but not impossible, but I also knew that it was a challenge worth taking on. Both of these scenarios, if successfully detected, would have been a measurable benefit to the environment I was tasked to secure. Unfortunately, both times it failed, not because KQL was a poor query language, but because of either an assumption I made at the star or a flaw in the data source.</p>
+<h2 id="trying-to-detect-ai-meeting-transcription">Trying to detect AI Meeting Transcription</h2>
+<p>It was specifically Read.AI that we were attempting to detect.</p>
+<p>The company I worked at had a product/service that was sensitive in nature and during sales calls we did demos. The problem was that this was the beginning of everyone’s &lsquo;inviting&rsquo; meeting recording AI tools to transcribe and summarize the conversation.</p>
+<p>At that time, it was against the company&rsquo;s NDA to record or share, but the sales team (afraid to upset the potential customer) seemed unwilling to enforce that part of the agreement. So, I tried the detection route! I&rsquo;d been successful at writing other custom detection so I hoped that this would be no different.</p>
+<h3 id="the-goal">The Goal</h3>
+<p>The goal was to alert when an external account joined a Teams meeting that matched a list of names that I compiled which matched common AI recording tools. Luckily today this isn&rsquo;t an issue, because Microsoft now has administrative controls to allow/block this.</p>
+<p>After a meeting was detected, I would send the meeting ID to an Azure Logic app that would use a high permissioned service account to join a meeting then comment on the specific &ldquo;leave the meeting&rdquo; command for the AI tool. In the case of Read.AI any member of the meeting can send the chat message &ldquo;Opt Out&rsquo; which make &ldquo;Read AI leave the meeting and deletes all measured data from that session. No report is generated.&rdquo; After typing the message, the service account would leave a brief message similar too &ldquo;Meeting recordings are not allowed according to Acme Solutions&rsquo; NDA and Acceptable Use Policies. Meeting recording ended.&rdquo; The Logic App would then send an email to the meeting organizer, CC their manager and the IT Security Director.</p>
+<p>All of this was not meant to control or punish users, but to automate the enforcement of an obvious gap in customer relations and provide an opportunity for educating internal teams.</p>
+<h3 id="the-how">The How</h3>
+<p>As of the time I’m writing this, I no longer have access to that environment, not to mention that it&rsquo;s been a few years, so I&rsquo;ll recount the details I can remember.</p>
+<p>After reviewing logs, I was able to connect several log types and tables across Microsoft data sources. I started by monitoring the <code>OfficeActivity</code> table for Teams Meeting participants that had a DisplayName that I was looking for:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <pre tabindex="0"><code class="language-kusto" data-lang="kusto">OfficeActivity
+| where OfficeWorkload == &#34;MicrosoftTeams&#34;
+| where Operation == &#34;CallParticipantDetail&#34;</code></pre>
+  </div><p>From there I matched one of the correlation IDs to another table that had a way to match a participant to a meeting ID. But from there is where the whole plan started to unravel.</p>
+<p>The Meeting ID was great, but that particular log was missing the chat thread ID that would allow the service account to join the conversation without me having to add to the meeting (which could have been rejected by the organizer).</p>
+<p>So, I had to wait until the first message was sent. This was okay for Read.AI and some others, because they would post a chat message upon joining. Once the first message was posted I could get the ChatThreadId and join and post the opt out message the chat session using the Microsoft Graph API action <a href="https://learn.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-1.0&amp;tabs=http">Send chatMessage in a channel or a chat</a>.</p>
+<p>AAAAAnd&hellip; It failed.</p>
+<h3 id="why-did-the-query-fail-for-participant-detection">Why did the query fail for participant detection?</h3>
+<p>In this case, all of the data points where available to me in the SIEM. Even more than that, they were all the data points I needed without having to infer anything or do string manipulation, or even correlate across vendors. It was perfect! Until it wasn&rsquo;t.</p>
+<p>The scenario failed when I was trying to test in real life (was going to allow the Logic App to run but it was force terminated before joining the meeting.) The problem was that the log that showed external participants joining the meeting was delayed to the point of unitability. Sometimes I&rsquo;d get the log 5 minutes after the agent joined the meeting, and one time I remember it was several hours after joining. While 5 minutes would be useful the average was longer than 30 minutes which made the success rate not worth pursuing.</p>
+<p>Why not try and do it and catch the instances you could? In order to do this the Logic App required ChannelMessage.Send and Chat.ReadWrite.All which would have required a more solid use case to convince <a href="https://youtu.be/tDPMcdd7F0A?si=Lxn9jWin4LCLiHJd&amp;t=34">the hands that hold the scepter</a> to grant such high permission to a service account.</p>
+<p>In the end it was a fun exercise for a newly minted SIEM engineer and I&rsquo;m glad I was given the time to pursue it.</p>
+<h2 id="trying-to-detect-email-impersonation">Trying to detect Email Impersonation</h2>
+<p>Just like the previous scenario I had grand visions with this one. I could swoop in and solve a problem that had been plaguing the company for years. In this environment, for a long standing and valid reason, they had certain email security architecture that allowed some types of email impersonation to pass the 3rd party email security tool.</p>
+<h3 id="the-problem">The Problem</h3>
+<p>A significant uptick of SaaS impersonation campaigns were showing up and we were relying on users to report them (should we miss them ourselves through manual checks). In my mind any repeated manual check was prime real estate for automation!</p>
+<p>So I got all excited that I really could do this and came up with this query:</p>
+<div class="code-block">
+    <button class="code-copy" type="button" hidden aria-label="Copy code to clipboard">
+      <span class="code-copy-label" aria-hidden="true">Copy</span>
+    </button>
+    <pre tabindex="0"><code class="language-kusto" data-lang="kusto">// Author:      Joshua Wyss
+// Last Updated:2026-6-2
+// Purpose:     Create alert when sender impersonating zoom has link to non-zoom domain. In early 2026 a rash of campaigns with zoom as sender and body as docusign linked to phishing domains. Email Security Tool couldn&#39;t catch b/c certain feature is disabled at this time and campaign load is unsustainable for users to continue manually reporting.
+//
+let commonGoodDomains = dynamic([&#34;facebook.com&#34;,&#34;twitter.com&#34;,&#34;x.com&#34;,&#34;linkedin.com&#34;,&#34;instagram.com&#34;,&#34;google.com&#34;,&#34;youtube.com&#34;,&#34;yahoo.com&#34;,&#34;support.docusign.com&#34;]); // ONLY ADD domains that are not abused for redirects (like monday.com or sendgrid.net etc)
+EmailEvents
+| where EmailDirection != &#34;Outbound&#34;
+//| where SenderFromDomain has &#34;zoom&#34;
+| where SenderFromAddress == &#34;no-reply@zoom.us&#34;
+| join EmailUrlInfo on NetworkMessageId
+//| summarize by EmailClusterId,Url,InternetMessageId,UrlDomain
+| extend finalParsedTargetUrlOrDomain = parse_url(Url).[&#34;Query Parameters&#34;].domain
+| where not(finalParsedTargetUrlOrDomain has_any (&#34;zoom.us&#34;,&#34;zoom.com&#34;)) and UrlDomain !has &#34;zoom&#34;
+| extend ipcheck = ipv4_is_private(tostring(finalParsedTargetUrlOrDomain))
+| where isempty(ipcheck) // Drop links that are IP Addresses (common for zoom to have IP addresses in emails)
+//| extend finalParsedTargetUrlOrDomain = coalesce(finalParsedTargetUrlOrDomain,Url) // Url may not have been a the email security tool coded url, if so grab the naked url from Outlook
+| where finalParsedTargetUrlOrDomain has &#34;.&#34; // This removes when the &#34;url&#34; was a local file:/// reference
+| where finalParsedTargetUrlOrDomain !endswith &#34;.png&#34; and finalParsedTargetUrlOrDomain !endswith &#34;.jpg&#34; and finalParsedTargetUrlOrDomain !endswith &#34;.jpeg&#34; and finalParsedTargetUrlOrDomain !endswith &#34;.svg&#34; and finalParsedTargetUrlOrDomain !endswith &#34;.woff2&#34; // Drop images
+| where not(finalParsedTargetUrlOrDomain has_any (commonGoodDomains))
+| join kind=leftouter (Ttp_Url_CL | where actions_s != &#34;Block&#34; | where url_s !startswith &#34;file:&#34;) on $left.InternetMessageId==$right.messageId_s
+| extend finalParsedTargetUrlOrDomain = coalesce(url_s,finalParsedTargetUrlOrDomain,Url) // Url may not have been a the email security tool coded url, if so grab the naked url from Outlook
+// NOTE: EmailSecurityToolEncodedUrl = Any URL Email Security Tool sees gets encoded.
+//                            B/c of this we can use this value as a unique identifier for campaign URLs regardless of it being clicked. :D
+// NOTE: EmailSecurityToolDecodedUrl = ONLY URLs that were clikced by user gets a record in Ttp_Url_CL (where this value comes from). So Empty value means not yet clicked.
+| extend EmailSecurityToolEncodedUrl = Url, EmailSecurityToolDecodedUrl = url_s
+| project-keep TimeGenerated, finalParsedTargetUrlOrDomain, EmailSecurityToolEncodedUrl, EmailSecurityToolDecodedUrl, AuthenticationDetails, ConfidenceLevel, DetectionMethods, DeliveryLocation, EmailClusterId, EmailDirection, OrgLevelAction, OrgLevelPolicy, InternetMessageId, NetworkMessageId, RecipientEmailAddress, SenderFromAddress, SenderIPv4, SenderIPv6, SenderMailFromAddress, Subject, ThreatTypes, UrlCount, To, action_s, Category, tagMap_AdvancedPhishing_CredentialTheftBrands_s</code></pre>
+  </div><p>Basically, it looks for domains that would be unexpected for a Zoom email. Why domains? It seemed the most reliable way to detect using logs.</p>
+<p>Why not that thing?</p>
+<ul>
+<li>We could create a list of known subject lines, but that would require manual upkeep. Manual upkeep should always be avoided.</li>
+<li>Matching a string in the body might work, but the campaigns we cared about always impersonated Zoom, but the body was constantly changing.</li>
+<li>What about looking for a known good string in Zoom emails and alerting the rest? That would be too easy for an attacker to throw in a Zoom email footer.</li>
+</ul>
+<p>But what they couldn&rsquo;t control was the zoom domain. While yes, Zoom emails do have other links to things like the sender&rsquo;s LinkedIn page or business Facebook group bad actors cannot control those either (Lets sidestep the redirect abuse conversation until later okay?) The only thing had to control here was where the link took the user.</p>
+<h3 id="why-did-query-fail-for-email-impersonatoin">Why did query fail for email impersonatoin?</h3>
+<p>This particular Email Security Tool (EST for short) would rewrite links in the email body to allow us to block a domain/URL as well as track who visited it (hint hint). When I did my initial check into if we had the logs I saw that we got the logs for who sent the email, subject line, and the IMID. The IMID correlated the email to the table that held all of the rewritten links and their decoded destination.</p>
+<p>I got excited that all of the pieces of the puzzle where there! Unfortunately, same as the previous scenario, it fell apart in testing.</p>
+<p>The problem here stems from two places.</p>
+<ol>
+<li>The EST&rsquo;s link rewriting only posted a log upon the first user click.</li>
+<li>The encoded link was not only unique per destination but also unique per user. The encoding was just a single string of characters like <code>redirect.emailsecurity[.]me\asldfk9F2o90vZN0s9jfn438v9h2\domain=lol.gotcha[.]com</code></li>
+</ol>
+<p>Problem #1: Since we only got the decoded URL upon the first click, we couldn&rsquo;t <em>prevent</em> everyone from clikcing. Since we couldn&rsquo;t block from arriving in the inbox, my original goal was to auto-block the links and auto-retract the emails.</p>
+<p>Problem #2: My plan to enumerate all of the emails that needed retracted was to reverse lookup the IMID by the link in the email body. But this was not possible because the encoded link was unique per person + destination. There was no other way to identify emails across a campaign since they didn&rsquo;t even come from the same sending address or infrastructure (thanks Spam as a Service) See <a href="https://darknetdiaries.com/episode/110/">Episode 110 of Darknet Diaries: Spam Botnets</a>.</p>
+<h3 id="the-outcome">The Outcome</h3>
+<p>Although this didn&rsquo;t work in the end it underscored the problem our security team was facing and how much effort we were putting into working around a problem created by a 10-year-old decision. This background gave &lsquo;ammo&rsquo; to management in charge to push for a change to better email security overall.</p>
+<h3 id="the-redirect-abuse-conversation">The redirect abuse conversation</h3>
+<p>Oh my, I&rsquo;m not a vendor so I&rsquo;m not sure how I&rsquo;d protect against it, but there are several services I&rsquo;ve seen that are being abused. linktracking.monday.com, sendgrid.com and MailerLite.com were all frequently used for redirecting using legitimate services.</p>
+<p>It was somewhat common to have multiple redirect hops and now that I&rsquo;m thinking of it, I wonder if our email security tool can protect against too many redirect hops? Note to self&hellip;</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>With hundreds of gigabytes of text flowing to me, it can feel like running a SIEM is a kind of IT superpower. But the moments that stick with me are the ones where the data is delayed, incomplete, or just not able to be coorelated. In those cases, the problem is rarely that the query language is wrong but instead it’s that the signal isn’t available when it matters. And that’s what makes these failures so frustrating: the tools are powerful, but the world still has data gaps that no query can fully bridge.</p>
+<p>What’s the one missing capability you’ve always wished a vendor would add?</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/categories/thoughts/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Thoughts</a>
+   </li>
+  
+</ul><ul class="pa0">
+  
+</ul>
+
+      
+    </div></article>
+</main><footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Ripping At The SIEM 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>From Net-Zero to &#34;Use more tokens!&#34; | Ripping At The SIEM</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="The post argues that AI won’t automatically replace jobs, but people who can use AI effectively will outperform those who don’t. It questions whether our focus on AI capabilities is distracting from bigger issues like corporate carbon goals and how organizations measure productivity. The author uses personal anecdotes—from a conference to Google Gemini in Android Auto—to show how AI is becoming a tool that reshapes work, habits, and what gets managed.">
+    <meta name="generator" content="Hugo 0.163.2">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="author" content="Joshua Wyss">
+    
+
+    <link rel="stylesheet" href="/ananke/css/main.css">
+    <script>
+  (function () {
+    "use strict";
+
+    
+    
+    function revealButtons() {
+      var buttons = document.querySelectorAll(".code-block .code-copy[hidden]");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].hidden = false;
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", revealButtons);
+    } else {
+      revealButtons();
+    }
+
+    function flash(button) {
+      var label = button.querySelector(".code-copy-label");
+      var previous = label ? label.textContent : null;
+      button.classList.add("is-copied");
+      if (label) label.textContent = "Copied";
+      window.setTimeout(function () {
+        button.classList.remove("is-copied");
+        if (label && previous !== null) label.textContent = previous;
+      }, 2000);
+    }
+
+    function legacyCopy(text) {
+      var area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "absolute";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (e) {
+        ok = false;
+      }
+      document.body.removeChild(area);
+      return ok;
+    }
+
+    function copyFrom(button) {
+      var container = button.closest(".code-block");
+      if (!container) return;
+      var pre = container.querySelector("pre");
+      if (!pre) return;
+      var source = pre.querySelector("code") || pre;
+      var text = source.innerText;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () { flash(button); },
+          function () { if (legacyCopy(text)) flash(button); }
+        );
+      } else if (legacyCopy(text)) {
+        flash(button);
+      }
+    }
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest(".code-copy");
+      if (button) copyFrom(button);
+    });
+  })();
+</script>
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/blog/can_ai_take_your_job/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/blog/can_ai_take_your_job/">
+	<meta property="og:site_name" content="Ripping At The SIEM">
+	<meta property="og:title" content="From Net-Zero to &#34;Use more tokens!&#34;">
+	<meta property="og:description" content="The post argues that AI won’t automatically replace jobs, but people who can use AI effectively will outperform those who don’t. It questions whether our focus on AI capabilities is distracting from bigger issues like corporate carbon goals and how organizations measure productivity. The author uses personal anecdotes—from a conference to Google Gemini in Android Auto—to show how AI is becoming a tool that reshapes work, habits, and what gets managed.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="blog">
+		<meta property="article:published_time" content="2026-05-28T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-05-28T00:00:00+00:00">
+
+	<meta itemprop="name" content="From Net-Zero to &#34;Use more tokens!&#34;">
+	<meta itemprop="description" content="The post argues that AI won’t automatically replace jobs, but people who can use AI effectively will outperform those who don’t. It questions whether our focus on AI capabilities is distracting from bigger issues like corporate carbon goals and how organizations measure productivity. The author uses personal anecdotes—from a conference to Google Gemini in Android Auto—to show how AI is becoming a tool that reshapes work, habits, and what gets managed.">
+	<meta itemprop="datePublished" content="2026-05-28T00:00:00+00:00">
+	<meta itemprop="dateModified" content="2026-05-28T00:00:00+00:00">
+	<meta itemprop="wordCount" content="1128">
+	<meta itemprop="keywords" content="Thoughts">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="From Net-Zero to &#34;Use more tokens!&#34;">
+	<meta name="twitter:description" content="The post argues that AI won’t automatically replace jobs, but people who can use AI effectively will outperform those who don’t. It questions whether our focus on AI capabilities is distracting from bigger issues like corporate carbon goals and how organizations measure productivity. The author uses personal anecdotes—from a conference to Google Gemini in Android Auto—to show how AI is becoming a tool that reshapes work, habits, and what gets managed.">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-can_ai_take_your_job">
+   
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <header class="cover bg-center" style="background-image: url('http://localhost:1313/images/can_ai_take_your_job.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Ripping At The SIEM
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/blog/" title="Blogs page">
+              Blogs
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/reference/" title="References page">
+              References
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">From Net-Zero to &#34;Use more tokens!&#34;</div>
+          
+            <div class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              The post argues that AI won’t automatically replace jobs, but people who can use AI effectively will outperform those who don’t. It questions whether our focus on AI capabilities is distracting from bigger issues like corporate carbon goals and how organizations measure productivity. The author uses personal anecdotes—from a conference to Google Gemini in Android Auto—to show how AI is becoming a tool that reshapes work, habits, and what gets managed.
+            </div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+<main class="pb7" role="main">
+  
+
+  <article class="page-can_ai_take_your_job flex-l mw7 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100"><aside class="instapaper_ignoref b helvetica tracked ttu">
+    <a class="link dim" href="http://localhost:1313/blog/">Blogs</a>
+  </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">From Net-Zero to &#34;Use more tokens!&#34;</h1>
+      
+      <p class="tracked"><strong>Joshua Wyss</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2026-05-28T00:00:00Z">May 28, 2026</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><h1 id="can-ai-take-your-job">Can AI Take your job?</h1>
+<p>AI may not replace work directly, but it changes how work is measured, valued, and optimized. That has consequences but what are the consequences.</p>
+<p>I recently attended the <a href="https://mmsmoa.com/">Midwest Management Summit at the Mall of America</a> and during one of the sessions the presenter made a good point. AI will not replace your job, but the person who knows how to utilize AI will replace the person who doesn&rsquo;t.</p>
+<p>The more I&rsquo;ve treid to learn AI tools the more I&rsquo;ve realized that if you don&rsquo;t already have a skillset you cannot move faster with AI. Maybe this will change as the models and tools improve, but I like Mischa&rsquo;s take in his post from December 2025:
+<a href="https://mischavandenburg.com/zet/ai-will-write-your-code-but-only-if-you-already-could/">AI Will Write Your Code, But Only If You Already Could by Mischa van den burg</a> The point he&rsquo;s making is that learning the fundamentals are still fundamental. The whole class hated having to learn Riemann sums in calculus, but it helped us really understand integrals. (Please don&rsquo;t ask me to do them now, <em>ask my wife she was a Math major!</em>)</p>
+<h2 id="net-zero-carbon-goals-wait-ai-is-in-the-house">Net Zero Carbon Goals, wait? AI IS IN THE HOUSE!</h2>
+<p>Among all the things that AI can or can&rsquo;t do or might or might do for experienced employees (I can&rsquo;t imagine what its like joining the workforce right now), the focus on features and capabilities overshadows the problem that bothers me the most&hellip;. <strong>What happened net-zero carbon goals from 2019?</strong></p>
+<p>When I was working at AspenTech (aquired by Emerson) they were preparing their carbon emission data for their public investor presentations, and at that point (probably 2024) AI was somewhat available, but it was still being heavily restricted in that corporate environment. With the topic of corporate carbon goals in my head I asked during a Microsoft Copilot users call if that ability to measure carbon production was availabe in the context of these new AI features was available, and they said they had never considered it.</p>
+<p>In 2020 Microsoft posted this article <a href="https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/">Microsoft will be carbon negative by 2030</a></p>
+<p><img src="images/microsoft-will-be-carbon-negative-in-2030.jpg" alt="Chart showing current 2020 emissions with drop to 0 by 2030">
+<a href="https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/">Source: Microsoft Blog</a></p>
+<p>Where did that focus go? My understanding of the world and climate impacts of human activity stem from the biblical biblical view point in <a href="https://www.bible.com/bible/59/GEN.1.28.ESV">Genesis 1:28</a> to &ldquo;&hellip;fill the earth and subdue it&hellip;&rdquo;. We should be using the resources we are given wisely to create and to better ourselves and not excessivly. In all things balance.</p>
+<p>Now, after all that I&rsquo;ve started using AI chat tools to try an learn a new skill. The same presenter that talked about those who learn AI pointed out that the same thing was said about IT profesionals 20 years ago that &ldquo;Those who learn PowerShell will replace those who don&rsquo;t.&rdquo;</p>
+<p>That balance of I don&rsquo;t want to (please don&rsquo;t bring up &ldquo;Who moved my cheese&rdquo;) and is it a good idea to is heavy on my mind.</p>
+<h2 id="10pm-gemini-conversation">10pm Gemini Conversation</h2>
+<p>I was driving last week around 10pm by myself, and in an attempt to stay awake I decided to see what capabilities Google Gemini had from my Android Auto interface. I got it talking about my destination, but it didn&rsquo;t seem to want to talk about anything beyond my drive and destination.</p>
+<p>I remembered reading about a new Gemini feature from Google IO 2026 (it is <a href="https://www.youtube.com/watch?v=Xyf0tFi_iXo">Neural Expressive</a> but I didn&rsquo;t remember that term) where it could change it&rsquo;s speach to more regional accents. That made me thing if the multi-language capabilities had improved, and they had.</p>
+<p>I learned a bit of Chinese (Mandarin, specifically) in college and wanted to practice. So, I asked (in Chinese) if it could speak Chinese, and Gemini happily switched langauges and was willing to talk about things other than my drive! I was heading to meet someone at McDonalds and we started with talking about popular items and then I got it completely away from the drive by asking if we could practice Chinese at my level and it happily complied, but the conversation topic was about ordering and the trip time remaining, etc.</p>
+<p>It was really interesting to be able to switc back and forth between languages, but also interesting that it seemed that in the Android Auto context that Gemini really wanted to stay in driving but was easily sidestepped when switching between langauges a couple of times.</p>
+<p>This &lsquo;mistake&rsquo; that Gemini was able to make by allowing me to talk about something other than our drive, for me, hights how easy it is for LLMs to make mistakes.</p>
+<h2 id="how-many-prompts-does-it-take">How many prompts does it take?</h2>
+<p>How often do you have to retry a prompt, make corrections, or completely start over to get the goal you want?</p>
+<p>I have a sticky not on my screen right now that reminds me:</p>
+<p><strong>Prompt Structure</strong></p>
+<ol>
+<li>Specify the goal at the start</li>
+<li>Ground with source data/scope</li>
+<li>Give context to get relevant responses</li>
+<li>Set expectations</li>
+<li>Iterate using previous prompts to refine the outcome.</li>
+</ol>
+<p>What is the balance between using AI to save time and taking too much time using AI? AI is non-deterministic, and unfortunatly for my engineering brain this answer is also non-deterministic.</p>
+<p>How many times do you use AI to do the same thing over and over? There was an experiment a year ago eximplifying the non-determinism. People would ask an AI tool to generate the same image (from the same initial prompt) 100 times and create a video cycling through the results. <a href="https://www.reddit.com/r/ChatGPT/comments/1kbj71z/i_tried_the_create_the_exact_replica_of_this/">I tried the &ldquo;Create the exact replica of this image, don&rsquo;t change a thing&rdquo; 101 times, but with Dwayne Johnson 🗿</a></p>
+<p>In your usage, do you consider efficiency when writing a prompt or creating an agent?</p>
+<h2 id="back-to-microsofts-carbon-goals">Back to Microsoft&rsquo;s Carbon Goals</h2>
+<p>At that Midwest Management Summit conference there were several presentations on AI (of course) but all around security and efficiency. However, during one of the presentations a Microsoft employee presenting had VS Code Open and was running some prompts in the side bar. This presenter had access to Claude (Internal Only) model used at Microsoft. At that point the model he chose had a x45 cost and when someone pointed it out he laughed and said, it doesn&rsquo;t cost him anthing!</p>
+<h2 id="what-gets-measured-gets-managed">What get&rsquo;s measured gets managed?</h2>
+<p>Does it bother you to hear stories about companies who track token usage and encourage employees to meet increase u goals while just months ago the same executives where having conversations on balancing employee daily commute miles with carbon credit purchases?</p>
+<p>I&rsquo;ve lurked on many a Reddit conversations about this &rsquo;tracking token usage&rsquo; as a way to hopefully increase productivity, and <a href="https://www.reddit.com/r/Futurology/comments/1sv7kse/inside_metas_ai_token_leaderboard_60_trillion/">here</a> a user named &ldquo;eilif_myrhe&rdquo; reminds us &ldquo;If you employer started a hammer usage leaderboard, You&rsquo;d see a lot of hammer smashing in offices&rdquo;</p>
+<p>What get&rsquo;s measured gets managed, but the goal it&rsquo;s measuring for is how it gets managed.</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/categories/thoughts/" class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Thoughts</a>
+   </li>
+  
+</ul><ul class="pa0">
+  
+</ul>
+
+      
+    </div></article>
+</main><footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Ripping At The SIEM 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
